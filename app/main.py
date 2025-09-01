@@ -1,7 +1,7 @@
 import asyncio
 import logging
 
-from bot.app import run_bot
+from app.app import run_bot
 
 # Configure logging for the bot service
 logging.basicConfig(

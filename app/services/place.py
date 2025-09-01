@@ -1,7 +1,7 @@
 import logging
 
-from bot.http_client import get_http_client_manager
-from bot.schemas.place import PlaceDetailsSchema, PlaceSearchSchema
+from app.http_client import get_http_client_manager
+from app.schemas.place import PlaceDetailsSchema, PlaceSearchSchema
 
 logger = logging.getLogger(__name__)
 

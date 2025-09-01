@@ -1,7 +1,7 @@
 import logging
 
-from bot.http_client import get_http_client_manager
-from bot.schemas.preferences import (
+from app.http_client import get_http_client_manager
+from app.schemas.preferences import (
     PreferencesInSchema,
     PreferencesSchema,
     PreferencesUpdateSchema,

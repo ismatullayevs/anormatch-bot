@@ -8,16 +8,16 @@ from aiogram.client.telegram import TEST
 from aiogram.fsm.storage.mongo import MongoStorage
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from bot.bot_commands import set_bot_profile
-from bot.config import EnvironmentTypes, settings
-from bot.handlers.likes import router as likes_router
-from bot.handlers.matches import router as matches_router
-from bot.handlers.menu import router as menu_router
-from bot.handlers.profile import router as profile_router
-from bot.handlers.registration import router as registration_router
-from bot.handlers.search import router as search_router
-from bot.http_client import initialize_http_client, shutdown_http_client
-from bot.middlewares import i18n_middleware
+from app.bot_commands import set_bot_profile
+from app.config import EnvironmentTypes, settings
+from app.handlers.likes import router as likes_router
+from app.handlers.matches import router as matches_router
+from app.handlers.menu import router as menu_router
+from app.handlers.profile import router as profile_router
+from app.handlers.registration import router as registration_router
+from app.handlers.search import router as search_router
+from app.http_client import initialize_http_client, shutdown_http_client
+from app.middlewares import i18n_middleware
 
 logger = logging.getLogger(__name__)
 
@@ -42,10 +42,10 @@ class BotApplication:
             logger.info("HTTP client manager initialized successfully")
 
             # Initialize bot instance
-            self.bot = Bot(token=settings.BOT_TOKEN)
-            if EnvironmentTypes.testing == settings.ENVIRONMENT:
+            self.bot = Bot(token=settings.bot_token)
+            if EnvironmentTypes.testing == settings.environment:
                 session = AiohttpSession(api=TEST)
-                self.bot = Bot(token=settings.BOT_TOKEN, session=session)
+                self.bot = Bot(token=settings.bot_token, session=session)
 
             # Set bot profile
             try:
@@ -76,7 +76,7 @@ class BotApplication:
             self.dispatcher.include_router(profile_router)
             self.dispatcher.include_router(matches_router)
 
-            if settings.DEBUG:
+            if settings.debug:
                 logger.info("Test router included (DEBUG mode)")
 
             logger.info("Bot application startup completed successfully")

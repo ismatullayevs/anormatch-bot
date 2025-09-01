@@ -1,0 +1,40 @@
+[project]
+name = "bot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiogram>=3.22.0",
+    "httpx>=0.28.1",
+    "motor>=3.7.1",
+    "pydantic-settings>=2.10.1",
+]
+
+[tool.ruff]
+fix = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D100",
+    "D107",
+    "INP001",
+    "EM101",
+    "TRY003",
+    "S106",
+    "TRY301",
+    "PLR2004",
+    "TD002",
+    "FIX002",
+    "TD003",
+    "D101",
+    "EM102",
+    "G004",
+    "TRY400",
+]
+
+fixable = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = ["S101", "ARG", "FBT", "PLR2004", "S311"]

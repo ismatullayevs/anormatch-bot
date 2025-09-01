@@ -1,0 +1,28 @@
+services:
+  bot:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    develop:
+      watch:
+        - action: sync
+          path: ./app
+          target: /app
+        - action: rebuild
+          path: ./pyproject.toml
+    command: sh -c "watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- python -m bot"
+
+  mongo:
+    image: mongo:5.0
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ADMIN}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+
+volumes:
+  mongo_data:

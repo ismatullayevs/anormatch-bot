@@ -5,8 +5,8 @@ from uuid import UUID
 import httpx
 from aiogram.utils.i18n import gettext as _
 
-from bot.http_client import get_http_client_manager
-from bot.schemas.media import FileSchema
+from app.http_client import get_http_client_manager
+from app.schemas.media import FileSchema
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +49,7 @@ async def get_user_media(telegram_user_id: int) -> list[FileSchema]:
 
     """
     # Get current user first to get their UUID
-    from bot.services.user import get_current_user
+    from app.services.user import get_current_user
 
     user = await get_current_user(telegram_user_id)
     media_list = await get_media(user.id)

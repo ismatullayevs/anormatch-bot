@@ -10,11 +10,11 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.i18n import gettext as _
 from aiogram.utils.media_group import MediaGroupBuilder
 
-from bot.config import EnvironmentTypes, settings
-from bot.enums import FileTypes
-from bot.schemas.media import FileSchema
-from bot.schemas.user import UserSchema
-from bot.services.place import get_place_name
+from app.config import EnvironmentTypes, settings
+from app.enums import FileTypes
+from app.schemas.media import FileSchema
+from app.schemas.user import UserSchema
+from app.services.place import get_place_name
 
 
 def haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -76,10 +76,10 @@ async def clear_state(state: FSMContext, except_locale=False):
 
 
 async def send_message(*args, **kwargs):
-    bot = Bot(token=settings.BOT_TOKEN)
-    if EnvironmentTypes.testing == settings.ENVIRONMENT:
+    bot = Bot(token=settings.bot_token)
+    if EnvironmentTypes.testing == settings.environment:
         session = AiohttpSession(api=TEST)
-        bot = Bot(token=settings.BOT_TOKEN, session=session)
+        bot = Bot(token=settings.bot_token, session=session)
     try:
         await bot.send_message(*args, **kwargs)
     finally:

@@ -4,9 +4,9 @@ from uuid import UUID
 import httpx
 from aiogram.utils.i18n import gettext as _
 
-from bot.http_client import get_http_client_manager
-from bot.schemas.reaction import ReactionInSchema, ReactionSchema
-from bot.schemas.user import UserSchema
+from app.http_client import get_http_client_manager
+from app.schemas.reaction import ReactionInSchema, ReactionSchema
+from app.schemas.user import UserSchema
 
 logger = logging.getLogger(__name__)
 

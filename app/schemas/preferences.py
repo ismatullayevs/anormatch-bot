@@ -2,8 +2,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, field_validator, model_validator
 
-from bot.enums import PreferredGenders
-from bot.validators import validate_preference_age, validate_preference_ages
+from app.enums import PreferredGenders
+from app.validators import validate_preference_age, validate_preference_ages
 
 
 class PreferencesInSchema(BaseModel):

@@ -13,36 +13,36 @@ class EnvironmentTypes(Enum):
 
 class BotSettings(BaseSettings):
     # Environment and debugging
-    ENVIRONMENT: EnvironmentTypes
-    DEBUG: bool = False
-    BASE_DIR: Path = Path(__file__).resolve().parent.parent
+    environment: EnvironmentTypes = EnvironmentTypes.production
+    debug: bool = False
+    base_dir: Path = Path(__file__).resolve().parent
 
     # Bot-specific settings
-    BOT_TOKEN: str
-    API_URL: str
-    APP_URL: str
-    INTERNAL_TOKEN: str
+    bot_token: str = ""
+    api_url: str = "https://localhost:8000"
+    app_url: str = "https://localhost:3000"
+    internal_token: str = ""
 
-    # MongoDB settings (bot sessions only)
-    MONGO_HOST: str
-    MONGO_PORT: int | None = None
-    MONGO_ADMIN: str
-    MONGO_PASSWORD: str
-    MONGO_REMOTE: bool = False
+    mongo_host: str = "localhost"
+    mongo_port: int | None = None
+    mongo_admin: str = "admin"
+    mongo_password: str = ""
+    mongo_remote: bool = False
 
     # Bot behavior settings
-    REWIND_LIMIT: int = 5
-    MAX_USER_MEDIA_FILES: int = 10
+    rewind_limit: int = 5
+    max_user_media_files: int = 10
 
     @property
-    def mongo_url(self):
-        admin = quote_plus(self.MONGO_ADMIN)
-        password = quote_plus(self.MONGO_PASSWORD)
-        if self.MONGO_REMOTE:
-            return f"mongodb+srv://{admin}:{password}@{self.MONGO_HOST}/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000"
-        return f"mongodb://{admin}:{password}@{self.MONGO_HOST}:{self.MONGO_PORT}"
+    def mongo_url(self) -> str:
+        """Construct the MongoDB connection URL."""
+        admin = quote_plus(self.mongo_admin)
+        password = quote_plus(self.mongo_password)
+        if self.mongo_remote:
+            return f"mongodb+srv://{admin}:{password}@{self.mongo_host}/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000"
+        return f"mongodb://{admin}:{password}@{self.mongo_host}:{self.mongo_port}"
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(env_file="../.env", extra="ignore")
 
 
 settings = BotSettings()

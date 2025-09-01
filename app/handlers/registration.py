@@ -10,10 +10,10 @@ from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from bot.config import settings
-from bot.enums import FileTypes
-from bot.handlers.menu import activate_account_start, show_menu
-from bot.keyboards import (
+from app.config import settings
+from app.enums import FileTypes
+from app.handlers.menu import activate_account_start, show_menu
+from app.keyboards import (
     GENDER_PREFERENCES,
     GENDERS,
     LANGUAGES,
@@ -24,18 +24,18 @@ from bot.keyboards import (
     get_preferred_genders_keyboard,
     make_keyboard,
 )
-from bot.middlewares import i18n_middleware
-from bot.schemas.media import FileSchema
-from bot.schemas.user import UserSchema
-from bot.services.place import (
+from app.middlewares import i18n_middleware
+from app.schemas.media import FileSchema
+from app.schemas.user import UserSchema
+from app.services.place import (
     get_place_by_coordinates,
     get_place_details,
     search_places,
 )
-from bot.services.user import get_current_user, is_user_banned
-from bot.states import AppStates
-from bot.utils import get_profile_card
-from bot.validators import (
+from app.services.user import get_current_user, is_user_banned
+from app.states import AppStates
+from app.utils import get_profile_card
+from app.validators import (
     Params,
     validate_bio,
     validate_birth_date,
@@ -578,27 +578,27 @@ async def finish_registration(message: types.Message, state: FSMContext) -> None
     # Place handling is now done by the API during registration
 
     headers = {
-        "X-Internal-Token": settings.INTERNAL_TOKEN,
+        "X-Internal-Token": settings.internal_token,
         "X-Telegram-User-Id": str(telegram_id),
     }
     async with httpx.AsyncClient() as session:
         try:
             response = await session.post(
-                f"{settings.API_URL}/v1/auth/register",
+                f"{settings.api_url}/v1/auth/register",
                 json=user_data,
                 headers=headers,
             )
             response.raise_for_status()
             user = UserSchema.model_validate(response.json())
             response = await session.post(
-                f"{settings.API_URL}/v1/media/batch-add",
+                f"{settings.api_url}/v1/media/batch-add",
                 json=media,
                 headers=headers,
             )
             response.raise_for_status()
             media = [FileSchema.model_validate(m) for m in response.json()]
             response = await session.post(
-                f"{settings.API_URL}/v1/preferences",
+                f"{settings.api_url}/v1/preferences",
                 json=preferences_data,
                 headers=headers,
                 params={"user_id": str(user.id)},

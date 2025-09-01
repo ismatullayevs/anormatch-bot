@@ -6,22 +6,22 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
 
-from bot.config import settings
-from bot.enums import ReactionType
-from bot.handlers.likes import show_likes, show_likes_with_keyboard
-from bot.handlers.matches import show_matches
-from bot.handlers.menu import show_menu
-from bot.keyboards import get_empty_search_keyboard, get_search_keyboard
-from bot.schemas.reaction import ReactionInSchema
-from bot.services.match import (
+from app.config import settings
+from app.enums import ReactionType
+from app.handlers.likes import show_likes, show_likes_with_keyboard
+from app.handlers.matches import show_matches
+from app.handlers.menu import show_menu
+from app.keyboards import get_empty_search_keyboard, get_search_keyboard
+from app.schemas.reaction import ReactionInSchema
+from app.services.match import (
     create_or_update_reaction,
     get_best_match,
     get_rewinds,
 )
-from bot.services.media import get_media
-from bot.services.user import get_current_user
-from bot.states import AppStates
-from bot.utils import get_profile_card
+from app.services.media import get_media
+from app.services.user import get_current_user
+from app.states import AppStates
+from app.utils import get_profile_card
 
 logger = logging.getLogger(__name__)
 
@@ -98,7 +98,7 @@ async def rewind(
         if e.response.status_code == 400:
             await message.answer(
                 _("You can't rewind more than {rewind_limit} times").format(
-                    rewind_limit=settings.REWIND_LIMIT,
+                    rewind_limit=settings.rewind_limit,
                 ),
             )
         raise

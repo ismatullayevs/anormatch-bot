@@ -5,7 +5,7 @@ from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
 from babel.support import LazyProxy
 
-from bot.enums import Genders, PreferredGenders, UILanguages
+from app.enums import Genders, PreferredGenders, UILanguages
 
 CLEAR_TXT = __("❌ Clear")
 

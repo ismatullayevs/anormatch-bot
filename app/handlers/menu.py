@@ -4,18 +4,18 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
 
-from bot.keyboards import (
+from app.keyboards import (
     LANGUAGES,
     get_languages_keyboard,
     get_menu_keyboard,
     get_settings_keyboard,
     make_keyboard,
 )
-from bot.middlewares import i18n_middleware
-from bot.schemas.user import UserUpdateSchema
-from bot.services.report import create_report
-from bot.services.user import delete_user, update_user
-from bot.states import AppStates
+from app.middlewares import i18n_middleware
+from app.schemas.user import UserUpdateSchema
+from app.services.report import create_report
+from app.services.user import delete_user, update_user
+from app.states import AppStates
 
 router = Router()
 

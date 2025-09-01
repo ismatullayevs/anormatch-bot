@@ -4,8 +4,8 @@ from uuid import UUID
 
 from pydantic import AfterValidator, BaseModel
 
-from bot.enums import Genders, UILanguages
-from bot.validators import validate_bio, validate_name
+from app.enums import Genders, UILanguages
+from app.validators import validate_bio, validate_name
 
 
 class UserInSchema(BaseModel):

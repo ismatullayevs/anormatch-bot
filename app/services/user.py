@@ -1,8 +1,8 @@
 import logging
 from uuid import UUID
 
-from bot.http_client import get_http_client_manager
-from bot.schemas.user import UserSchema, UserUpdateSchema
+from app.http_client import get_http_client_manager
+from app.schemas.user import UserSchema, UserUpdateSchema
 
 logger = logging.getLogger(__name__)
 

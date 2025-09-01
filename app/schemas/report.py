@@ -3,7 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from bot.enums import ReportStatusTypes
+from app.enums import ReportStatusTypes
 
 
 class ReportSchema(BaseModel):

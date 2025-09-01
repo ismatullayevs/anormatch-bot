@@ -3,7 +3,7 @@ from typing import Any
 
 import httpx
 
-from bot.config import BotSettings
+from app.config import BotSettings
 
 logger = logging.getLogger(__name__)
 
@@ -48,14 +48,14 @@ class HTTPClientManager:
 
             # Base headers for all requests
             headers = {
-                "X-Internal-Token": self._config.INTERNAL_TOKEN,
+                "X-Internal-Token": self._config.internal_token,
                 "User-Agent": "AnorDating-Bot/1.0",
                 "Accept": "application/json",
                 "Content-Type": "application/json",
             }
 
             self._client = httpx.AsyncClient(
-                base_url=self._config.API_URL,
+                base_url=self._config.api_url,
                 limits=limits,
                 timeout=timeout,
                 headers=headers,
@@ -65,7 +65,7 @@ class HTTPClientManager:
             self._is_initialized = True
             logger.info(
                 f"HTTP client initialized successfully. "
-                f"Base URL: {self._config.API_URL}, "
+                f"Base URL: {self._config.api_url}, "
                 f"Max connections: {limits.max_connections}, "
                 f"Keepalive: {limits.max_keepalive_connections}",
             )
@@ -115,7 +115,7 @@ class HTTPClientManager:
         method: str,
         url: str,
         telegram_user_id: int | None = None,
-        **kwargs: dict[str, Any],
+        **kwargs: Any,
     ) -> httpx.Response:
         """Make an HTTP request with automatic header injection.
 
@@ -162,7 +162,7 @@ class HTTPClientManager:
         self,
         url: str,
         telegram_user_id: int | None = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> httpx.Response:
         """Convenience method for GET requests."""
         return await self.request("GET", url, telegram_user_id, **kwargs)

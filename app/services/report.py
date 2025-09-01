@@ -4,8 +4,8 @@ from uuid import UUID
 import httpx
 from aiogram.utils.i18n import gettext as _
 
-from bot.http_client import get_http_client_manager
-from bot.schemas.report import ReportSchema
+from app.http_client import get_http_client_manager
+from app.schemas.report import ReportSchema
 
 logger = logging.getLogger(__name__)
 

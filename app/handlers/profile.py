@@ -7,10 +7,10 @@ from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from bot.enums import FileTypes
-from bot.handlers.menu import show_settings
-from bot.handlers.registration import GENDER_PREFERENCES, GENDERS
-from bot.keyboards import (
+from app.enums import FileTypes
+from app.handlers.menu import show_settings
+from app.handlers.registration import GENDER_PREFERENCES, GENDERS
+from app.keyboards import (
     CLEAR_TXT,
     get_ask_location_keyboard,
     get_genders_keyboard,
@@ -19,19 +19,19 @@ from bot.keyboards import (
     get_profile_update_keyboard,
     make_keyboard,
 )
-from bot.schemas.preferences import PreferencesUpdateSchema
-from bot.schemas.user import UserUpdateSchema
-from bot.services import preferences as preferences_service
-from bot.services.media import get_user_media, replace_all_media
-from bot.services.place import (
+from app.schemas.preferences import PreferencesUpdateSchema
+from app.schemas.user import UserUpdateSchema
+from app.services import preferences as preferences_service
+from app.services.media import get_user_media, replace_all_media
+from app.services.place import (
     get_place_by_coordinates,
     get_place_details,
     search_places,
 )
-from bot.services.user import get_current_user, update_user
-from bot.states import AppStates
-from bot.utils import clear_state, get_profile_card
-from bot.validators import (
+from app.services.user import get_current_user, update_user
+from app.states import AppStates
+from app.utils import clear_state, get_profile_card
+from app.validators import (
     Params,
     validate_bio,
     validate_birth_date,

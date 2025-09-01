@@ -3,7 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from bot.enums import ReactionType
+from app.enums import ReactionType
 
 
 class ReactionInSchema(BaseModel):

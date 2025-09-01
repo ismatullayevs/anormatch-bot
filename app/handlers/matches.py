@@ -6,14 +6,14 @@ from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
 from httpx import HTTPStatusError
 
-from bot.config import settings
-from bot.handlers.menu import show_menu
-from bot.keyboards import get_matches_keyboard
-from bot.services.match import get_matches
-from bot.services.media import get_media
-from bot.services.user import get_current_user
-from bot.states import AppStates
-from bot.utils import get_profile_card
+from app.config import settings
+from app.handlers.menu import show_menu
+from app.keyboards import get_matches_keyboard
+from app.services.match import get_matches
+from app.services.media import get_media
+from app.services.user import get_current_user
+from app.states import AppStates
+from app.utils import get_profile_card
 
 router = Router()
 
@@ -72,7 +72,7 @@ async def show_matches(
                     types.InlineKeyboardButton(
                         text=_("Start a chat"),
                         web_app=types.WebAppInfo(
-                            url=f"{settings.APP_URL}/users/{match.id}/chat",
+                            url=f"{settings.app_url}/users/{match.id}/chat",
                         ),
                     ),
                 ],
