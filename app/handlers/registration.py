@@ -45,7 +45,6 @@ from app.validators import (
     validate_video_duration,
 )
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 router = Router()
@@ -80,12 +79,17 @@ async def cmd_start(message: types.Message, state: FSMContext) -> None:
     locale = await state.get_value("locale")
     await state.set_data({"locale": locale})
 
-    if await is_user_banned(message.from_user.id):
-        await message.answer(
-            _("Your account is banned. Please contact support."),
-            reply_markup=types.ReplyKeyboardRemove(),
-        )
-        return
+    try:
+        if await is_user_banned(message.from_user.id):
+            await message.answer(
+                _("Your account is banned. Please contact support."),
+                reply_markup=types.ReplyKeyboardRemove(),
+            )
+            return
+    except httpx.HTTPStatusError as e:
+        # If user not found, continue to registration
+        if e.response.status_code != 404:
+            raise
 
     try:
         user = await get_current_user(message.from_user.id)

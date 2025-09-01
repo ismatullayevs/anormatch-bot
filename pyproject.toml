@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "aiogram>=3.22.0",
+    "asyncio>=4.0.0",
+    "babel>=2.17.0",
     "httpx>=0.28.1",
     "motor>=3.7.1",
     "pydantic-settings>=2.10.1",
@@ -38,3 +40,8 @@ fixable = ["ALL"]
 
 [tool.ruff.lint.per-file-ignores]
 "test_*.py" = ["S101", "ARG", "FBT", "PLR2004", "S311"]
+
+[dependency-groups]
+dev = [
+    "watchdog[watchmedo]>=6.0.0",
+]

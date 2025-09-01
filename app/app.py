@@ -76,9 +76,6 @@ class BotApplication:
             self.dispatcher.include_router(profile_router)
             self.dispatcher.include_router(matches_router)
 
-            if settings.debug:
-                logger.info("Test router included (DEBUG mode)")
-
             logger.info("Bot application startup completed successfully")
 
         except Exception as e:
@@ -127,6 +124,7 @@ class BotApplication:
             self._is_running = True
             logger.info("Starting bot polling...")
 
+            logger.debug(f"Bot token: {self.bot.token}")
             # Start polling with proper shutdown handling
             await self.dispatcher.start_polling(
                 self.bot,
@@ -146,18 +144,6 @@ class BotApplication:
             await self.run_polling()
         finally:
             await self.shutdown()
-
-
-async def create_bot_app() -> BotApplication:
-    """Create and initialize a bot application instance.
-
-    Returns:
-        BotApplication: Configured bot application ready to run
-
-    """
-    app = BotApplication()
-    await app.startup()
-    return app
 
 
 async def run_bot() -> None:

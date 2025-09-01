@@ -11,18 +11,7 @@ services:
           target: /app
         - action: rebuild
           path: ./pyproject.toml
-    command: sh -c "watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- python -m bot"
+    command: sh -c "watchmedo auto-restart --directory=./app --pattern=*.py --recursive -- python3 -m app.main"
 
   mongo:
-    image: mongo:5.0
-    restart: always
-    volumes:
-      - mongo_data:/data/db
-    env_file:
-      - .env
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ADMIN}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
-
-volumes:
-  mongo_data:
+    restart: unless-stopped

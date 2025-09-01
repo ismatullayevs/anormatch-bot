@@ -2,10 +2,11 @@ import asyncio
 import logging
 
 from app.app import run_bot
+from app.config import settings
 
 # Configure logging for the bot service
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG if settings.debug else logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(),

@@ -5,7 +5,7 @@ from app.config import settings
 # Bot-specific i18n configuration
 
 i18n = I18n(
-    path=settings.base_dir / "bot" / "locales",
+    path=settings.base_dir / "locales",
     default_locale="en",
     domain="messages",
 )

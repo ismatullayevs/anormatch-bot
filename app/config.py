@@ -1,8 +1,11 @@
+import logging
 from enum import Enum
 from pathlib import Path
 from urllib.parse import quote_plus
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+logger = logging.getLogger(__name__)
 
 
 class EnvironmentTypes(Enum):
