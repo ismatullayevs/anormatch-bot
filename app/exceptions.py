@@ -1,0 +1,2 @@
+class SameReactionExists(ValueError):
+    pass

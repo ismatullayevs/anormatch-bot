@@ -1,0 +1,3 @@
+pybabel extract --input-dirs=. -o bot/locales/messages.pot -k _:1,1t -k _:1,2 -k __ -k _v:1 --ignore-dirs=.venv
+pybabel update -i bot/locales/messages.pot -d bot/locales -D messages -N --ignore-obsolete
+pybabel compile -d bot/locales -D messages
